@@ -13,11 +13,16 @@
             <div class="form-section">
                 <h3>Choose Template</h3>
                 <div class="template-options">
-                    <label><input type="radio" name="template" value="template1" checked><div class="template-preview template1">Premium</div></label>
-                    <label><input type="radio" name="template" value="template2"><div class="template-preview template2">Elegant</div></label>
-                    <label><input type="radio" name="template" value="template3"><div class="template-preview template3">Classic</div></label>
-                    <label><input type="radio" name="template" value="template4"><div class="template-preview template4">Luxury</div></label>
+                    <label><input type="radio" name="template" value="template1" checked><div class="template-preview template1">Ocean Blue</div></label>
+                    <label><input type="radio" name="template" value="template2"><div class="template-preview template2">Sunset</div></label>
+                    <label><input type="radio" name="template" value="template3"><div class="template-preview template3">Forest</div></label>
+                    <label><input type="radio" name="template" value="template4"><div class="template-preview template4">Royal</div></label>
                     <label><input type="radio" name="template" value="template5"><div class="template-preview template5">Minimal</div></label>
+                    <label><input type="radio" name="template" value="template6"><div class="template-preview template6">Night Sky</div></label>
+                    <label><input type="radio" name="template" value="template7"><div class="template-preview template7">Rose Gold</div></label>
+                    <label><input type="radio" name="template" value="template8"><div class="template-preview template8">Emerald</div></label>
+                    <label><input type="radio" name="template" value="template9"><div class="template-preview template9">Crimson</div></label>
+                    <label><input type="radio" name="template" value="template10"><div class="template-preview template10">Neon</div></label>
                 </div>
             </div>
 
@@ -64,12 +69,24 @@
             <div class="form-section">
                 <h3>Social Media</h3>
                 <div class="form-group">
+                    <label for="linkedin">LinkedIn URL</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                </div>
+                <div class="form-group">
+                    <label for="twitter">Twitter/X URL</label>
+                    <input type="url" id="twitter" name="twitter" placeholder="https://twitter.com/yourhandle">
+                </div>
+                <div class="form-group">
                     <label for="instagram">Instagram URL</label>
                     <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/yourprofile">
                 </div>
                 <div class="form-group">
                     <label for="facebook">Facebook URL</label>
                     <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/yourprofile">
+                </div>
+                <div class="form-group">
+                    <label for="github">GitHub URL</label>
+                    <input type="url" id="github" name="github" placeholder="https://github.com/yourusername">
                 </div>
             </div>
 
@@ -101,12 +118,19 @@
     <div class="preview-page">
         <h2>Live Card Preview</h2>
         <div id="cardPreview" class="card-preview template1">
-            <img id="previewImage" class="preview-img" src="https://via.placeholder.com/80" alt="Profile">
-            <h3 id="previewName">Your Name</h3>
-            <p id="previewTitle">Your Job Title</p>
-            <p id="previewCompany">Company Name</p>
-            <p id="previewEmail">your@email.com</p>
-            <p id="previewPhone">+1 234 567 8900</p>
+            <div class="preview-header">
+                <img id="previewImage" class="preview-img" src="https://via.placeholder.com/80" alt="Profile">
+            </div>
+            <div class="preview-content">
+                <h3 id="previewName">Your Name</h3>
+                <p id="previewTitle" class="preview-job">Your Job Title</p>
+                <p id="previewCompany" class="preview-company">Company Name</p>
+                <div class="preview-divider"></div>
+                <div class="preview-contact">
+                    <p id="previewEmail" class="contact-item-preview"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>your@email.com</p>
+                    <p id="previewPhone" class="contact-item-preview"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>+1 234 567 8900</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

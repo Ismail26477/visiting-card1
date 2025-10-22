@@ -132,7 +132,10 @@ def create_card():
         address = request.form.get('address')
         linkedin = request.form.get('linkedin')
         twitter = request.form.get('twitter')
-        theme_color = request.form.get('theme_color')
+        instagram = request.form.get('instagram')
+        facebook = request.form.get('facebook')
+        github = request.form.get('github')
+        template = request.form.get('template', 'template1')
         is_public = request.form.get('is_public') in ['true', 'on', '1']  # ✅ handle checkbox
 
         # Handle file upload
@@ -156,7 +159,10 @@ def create_card():
             'address': address,
             'linkedin': linkedin,
             'twitter': twitter,
-            'theme_color': theme_color,
+            'instagram': instagram,
+            'facebook': facebook,
+            'github': github,
+            'template': template,
             'profile_image_url': profile_image_url,
             'is_public': is_public,
             'created_at': datetime.utcnow(),
