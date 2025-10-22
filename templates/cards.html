@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Cards - Digital Visiting Card{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>
+/* Quick styling for cards grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-preview {
+    display: block;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.card-preview-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.card-preview-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.card-preview-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-preview-info p {
+    margin: 2px 0 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.card-preview-details {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.card-preview-details p {
+    margin: 5px 0;
+}
+
+.card-preview-footer {
+    padding: 10px 15px;
+    border-top: 1px solid #eee;
+    font-size: 0.8rem;
+    color: #777;
+    display: flex;
+    align-items: center;
+}
+
+.card-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+.loading-spinner .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.empty-state {
+    text-align: center;
+    margin-top: 50px;
+}
+.empty-state svg {
+    margin-bottom: 15px;
+    stroke: #999;
+}
+.empty-state h3 {
+    margin-bottom: 5px;
+}
+.empty-state p {
+    color: #666;
+    margin-bottom: 15px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">Browse Visiting Cards</h1>
+        <p class="page-subtitle">Explore professional digital visiting cards from our community</p>
+    </div>
+
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading cards...</p>
+    </div>
+
+    <div id="cardsGrid" class="cards-grid"></div>
+
+    <div id="emptyState" class="empty-state" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <h3>No Cards Yet</h3>
+        <p>Be the first to create a visiting card!</p>
+        <a href="/create" class="btn btn-primary">Create Your Card</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/cards.js') }}"></script>
+{% endblock %}

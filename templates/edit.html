@@ -1,0 +1,102 @@
+<!--edit.html-->
+
+{% extends "base.html" %}
+
+{% block title %}Edit Card - Digital Visiting Card{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-page">
+        <h1 class="page-title">Edit Your Visiting Card</h1>
+        <p class="page-subtitle">Update your card details</p>
+
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading card data...</p>
+        </div>
+
+        <form id="editCardForm" class="card-form" style="display: none;">
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <div class="form-group">
+                    <label for="full_name">Full Name *</label>
+                    <input type="text" id="full_name" name="full_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="job_title">Job Title</label>
+                    <input type="text" id="job_title" name="job_title">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Contact Details</h3>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="url" id="website" name="website">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Social Media</h3>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn URL</label>
+                    <input type="url" id="linkedin" name="linkedin">
+                </div>
+                <div class="form-group">
+                    <label for="twitter">Twitter/X Handle</label>
+                    <input type="text" id="twitter" name="twitter">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Customization</h3>
+                <div class="form-group">
+                    <label for="theme_color">Theme Color</label>
+                    <div class="color-picker-group">
+                        <input type="color" id="theme_color" name="theme_color">
+                        <span id="colorValue"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profile_image_url">Profile Image URL</label>
+                    <input type="url" id="profile_image_url" name="profile_image_url">
+                    <small>Enter a URL to your profile picture</small>
+                </div>
+                
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-large">Update Card</button>
+                <a id="cancelBtn" href="" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const cardId = "{{ card_id }}";
+</script>
+<script src="{{ url_for('static', filename='js/edit.js') }}"></script>
+{% endblock %}

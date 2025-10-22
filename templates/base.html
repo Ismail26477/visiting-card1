@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Digital Visiting Card{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <!-- LEFT: Logo -->
+    <div class="nav-left">
+      <a href="/" class="logo">VedaaAI</a>
+    </div>
+
+    <!-- CENTER: Main Links -->
+    <ul class="nav-center">
+      <li><a href="/">Home</a></li>
+      <li><a href="/create">Create Card</a></li>
+      <li><a href="/cards">Browse Cards</a></li>
+    </ul>
+
+    <!-- RIGHT: Login/Register OR Welcome/Logout -->
+    <ul class="nav-right">
+      {% if session.username %}
+        <li class="welcome-text">Welcome, {{ session.username }}</li>
+        <li><a href="{{ url_for('logout') }}" class="btn-logout">Logout</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" class="btn-login">Login</a></li>
+        <li><a href="{{ url_for('register') }}" class="btn-register">Register</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+
+
+  <!-- Main Content -->
+  <main>
+    <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  <div class="flash-container">
+    {% for category, message in messages %}
+      <div class="flash-message {{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
+
+
+    <!-- Page Content -->
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 VedaaAI. Digital Visiting Cards Made Simple.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

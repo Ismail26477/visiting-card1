@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Digital Visiting Card{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+    <h1 class="page-title">Welcome Back</h1>
+    <p class="page-subtitle">Log in to access your digital visiting cards</p>
+
+    <form id="loginForm" method="POST" action="/login">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-large">Login</button>
+        </div>
+
+        <p style="text-align:center; margin-top:1rem;">
+            Don't have an account? <a href="/register">Register here</a>
+        </p>
+    </form>
+</div>
+{% endblock %}
+
