@@ -1070,7 +1070,8 @@ html {
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     padding: 40px 30px 60px;
-    width: 340px;
+    width: 320px;
+    max-width: 90%;
     position: relative;
     overflow: hidden;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -1093,13 +1094,19 @@ html {
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
+    z-index: 1;
+    position: relative;
+}
+
 .card-logo {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    margin-bottom: 20px;
-    border: 3px solid var(--primary-color);
+    border: 4px solid rgba(255,255,255,0.5);
     z-index: 1;
     position: relative;
     transition: transform 0.3s ease;
@@ -1109,13 +1116,91 @@ html {
     transform: rotate(-5deg) scale(1.05);
 }
 
+.card-content {
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
 .card-name {
     font-size: 1.75rem;
     font-weight: 800;
-    margin-bottom: 10px;
-    color: #1e293b;
+    margin-bottom: 5px;
     z-index: 1;
     position: relative;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+    opacity: 0.9;
+    z-index: 1;
+    position: relative;
+}
+
+.card-company {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+    opacity: 0.8;
+    z-index: 1;
+    position: relative;
+}
+
+.card-divider {
+    width: 60%;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.card-contact {
+    margin: 15px 0;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.contact-item svg {
+    flex-shrink: 0;
+}
+
+.card-social {
+    margin: 15px 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.4);
 }
 
 .card-job {
@@ -1128,32 +1213,56 @@ html {
 }
 
 /* Improved QR Container Style */
+/* ✨ Modern QR Container Style */
 .qr-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;              /* Set size, adjust as needed */
-    height: 150px;
-    margin: 25px auto;         /* Centers it perfectly */
-    padding: 0;
-    border: none;              /* Removes dashed border */
-    background: transparent;   /* Removes background */
-    z-index: 1;
+    width: 170px;
+    height: 170px;
+    margin: 30px auto;
+    padding: 12px;
+    background: linear-gradient(145deg, #ffffff, #f3f3f3);
+    border-radius: 16px;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    transition: all 0.35s ease;
+    overflow: hidden;
+}
+
+.qr-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: radial-gradient(circle at top left, #00c6ff, #0072ff);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.qr-container:hover::before {
+    opacity: 0.15;
 }
 
 .qr-container img {
     width: 100%;
     height: 100%;
-    object-fit: contain;       /* Makes sure QR fits nicely */
-    border-radius: 12px;       /* Optional – soft rounded edges */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Attractive soft glow */
+    object-fit: contain;
+    border-radius: 12px;
+    z-index: 1;
+    transition: transform 0.35s ease;
+}
+
+.qr-container:hover img {
+    transform: scale(1.06) rotate(1deg);
 }
 
 .qr-container:hover {
-    transform: scale(1.08);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #fdfdfd, #f1f1f1);
 }
 
 
@@ -1202,7 +1311,17 @@ html {
 
 .btn-secondary:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(71, 85, 105, 0.3);
+    box-shadow: 0 8px 20px rgba(100, 116, 139, 0.3);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
 /* Animations */
@@ -1273,7 +1392,9 @@ html {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 12px;
 }
-
+/* =========================
+   Template preview (existing)
+   ========================= */
 .template-preview {
     width: 100%;
     height: 70px;
@@ -1296,31 +1417,43 @@ html {
     box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
+/* hidden radio */
 .template-options input[type="radio"] {
-    display: none; /* hide radio button */
+    display: none;
 }
 
+/* when radio is checked and template-preview is the next sibling */
 .template-options input[type="radio"]:checked + .template-preview {
     border-color: #2563eb;
-    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    box-shadow: 0 0 18px rgba(37, 99, 235, 0.30);
+    transform: translateY(-4px);
 }
 
-/* Template Styles */
-#cardPreview.template1 {
-    background-color: #f9f9f9;
-    color: #333;
+/* JS-driven active class (in case JS toggles .active) */
+.template-preview.active {
+    border-color: #2563eb;
+    box-shadow: 0 0 18px rgba(37, 99, 235, 0.30);
+    transform: translateY(-4px);
 }
 
-#cardPreview.template2 {
-    background-color: #333;
-    color: #fff;
-}
+/* =========================
+   Template swatch colors
+   (keeps the visual preview in chooser)
+   ========================= */
+.template-preview.template1 { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: #fff; } /* Ocean/Royal */
+.template-preview.template2 { background: linear-gradient(135deg,#f093fb 0%,#f5576c 100%); color: #fff; } /* Pink/Peach */
+.template-preview.template3 { background: linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); color: #000; } /* Blue */
+.template-preview.template4 { background: linear-gradient(135deg,#43e97b 0%,#38f9d7 100%); color: #000; } /* Green */
+.template-preview.template5 { background: linear-gradient(135deg,#fa709a 0%,#fee140 100%); color: #000; } /* Warm */
+.template-preview.template6 { background: linear-gradient(135deg,#30cfd0 0%,#330867 100%); color: #fff; } /* Teal/Dark */
+.template-preview.template7 { background: linear-gradient(135deg,#a8edea 0%,#fed6e3 100%); color: #333; } /* Soft */
+.template-preview.template8 { background: linear-gradient(135deg,#ff9a9e 0%,#fecfef 100%); color: #333; } /* Rose */
+.template-preview.template9 { background: linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%); color: #333; } /* Peach */
+.template-preview.template10 { background: linear-gradient(135deg,#ff0844 0%,#ffb199 100%); color: #fff; } /* Bold Red */
 
-#cardPreview.template3 {
-    background-color: #ffeedd;
-    color: #333;
-}
-
+/* =========================
+   Layout & preview panel (kept and slightly enhanced)
+   ========================= */
 .create-card-layout {
   display: flex;
   gap: 50px;
@@ -1352,6 +1485,7 @@ html {
   border-bottom: 3px solid var(--primary-color);
 }
 
+/* Card preview base */
 .card-preview {
   border: 3px solid #e2e8f0;
   border-radius: 20px;
@@ -1417,6 +1551,7 @@ html {
   border-radius: 2px;
 }
 
+/* contact block */
 .preview-contact {
   display: flex;
   flex-direction: column;
@@ -1432,55 +1567,115 @@ html {
   opacity: 0.9;
 }
 
-/* Advanced Template Styles */
-.template1 {
+/* =========================
+   Advanced template styles (applied to both .visiting-card and .card-preview)
+   These keep your gradient backgrounds for full preview card.
+   ========================= */
+.visiting-card.template1, .card-preview.template1 {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
 }
 
-.template2 {
+.visiting-card.template2, .card-preview.template2 {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     color: #fff;
 }
 
-.template3 {
+.visiting-card.template3, .card-preview.template3 {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: #000;
 }
 
-.template4 {
+.visiting-card.template4, .card-preview.template4 {
     background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     color: #000;
 }
 
-.template5 {
+.visiting-card.template5, .card-preview.template5 {
     background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     color: #000;
 }
 
-.template6 {
+.visiting-card.template6, .card-preview.template6 {
     background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
     color: #fff;
 }
 
-.template7 {
+.visiting-card.template7, .card-preview.template7 {
     background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     color: #333;
 }
 
-.template8 {
+.visiting-card.template8, .card-preview.template8 {
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
     color: #333;
 }
 
-.template9 {
+.visiting-card.template9, .card-preview.template9 {
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
     color: #333;
 }
 
-.template10 {
+.visiting-card.template10, .card-preview.template10 {
     background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
     color: #fff;
 }
 
+/* =========================
+   Additional preview nodes (website / address / bio / socials)
+   These style the dynamic nodes created by JS so they fit the preview nicely
+   ========================= */
+.preview-website,
+.preview-address,
+.preview-bio {
+    display: block;
+    margin: 6px 0;
+    font-size: 0.9rem;
+    color: inherit;
+    opacity: 0.95;
+}
 
+/* when preview node contains an icon + <span class="value">, align that span nicely */
+.preview-website .value,
+.preview-address .value {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+/* social links container */
+.preview-socials {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* social anchor default hidden and styled when present */
+.preview-socials a {
+    display: none; /* JS will show when value provided */
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: inherit;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* visible state for social links when JS sets display */
+.preview-socials a[style*="display:inline-block"],
+.preview-socials a[style*="display:block"] {
+    display: inline-block;
+}
+
+/* =========================
+   Responsive tweaks
+   ========================= */
+@media (max-width: 980px) {
+    .create-card-layout { flex-direction: column; gap: 24px; }
+    .preview-page { position: relative; top: 0; }
+    .template-preview { height: 60px; font-size: 0.7rem; }
+    .card-preview { padding: 20px; min-height: 300px; }
+}

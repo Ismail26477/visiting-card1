@@ -1,5 +1,3 @@
-<!--view_card.html-->
-
 {% extends "base.html" %}
 
 {% block title %}View Visiting Card{% endblock %}
@@ -10,9 +8,18 @@
 
 {% block content %}
 <div class="card-wrapper">
-    <div id="visitingCard" class="visiting-card">
-        <img id="logoImage" class="card-logo" alt="Logo">
-        <h2 id="cardName" class="card-name"></h2>
+    <div id="visitingCard" class="visiting-card template1">
+        <div class="card-header">
+            <img id="logoImage" class="card-logo" alt="Logo">
+        </div>
+
+        <div class="card-content">
+            <h2 id="cardName" class="card-name"></h2>
+            <!-- Removed title, company, divider, contact and social sections -->
+             <div class="card-divider"></div>
+        </div>
+        
+
         <div id="qrcode" class="qr-container"></div>
         <p class="made-by">Made by <strong>VedaaAI</strong></p>
     </div>
@@ -20,6 +27,7 @@
     <div class="download-buttons">
         <button id="downloadPNG" class="btn btn-primary">Download PNG</button>
         <button id="downloadPDF" class="btn btn-secondary">Download PDF</button>
+        <button id="downloadVCard" class="btn btn-success">Download vCard</button>
     </div>
 </div>
 {% endblock %}

@@ -21,18 +21,18 @@
     text-decoration: none;
     color: inherit;
     transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 200px;
 }
 
 .card-preview:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .card-preview-header {
     display: flex;
     align-items: center;
-    padding: 15px;
-    background-color: #f9f9f9;
+    padding: 20px 15px;
 }
 
 .card-preview-img {
@@ -41,6 +41,7 @@
     border-radius: 50%;
     object-fit: cover;
     margin-right: 15px;
+    border: 3px solid rgba(255,255,255,0.3);
 }
 
 .card-preview-info h3 {
@@ -52,26 +53,26 @@
 .card-preview-info p {
     margin: 2px 0 0;
     font-size: 0.9rem;
-    color: #555;
+    opacity: 0.9;
 }
 
 .card-preview-details {
     padding: 10px 15px;
     font-size: 0.85rem;
-    color: #333;
 }
 
 .card-preview-details p {
     margin: 5px 0;
+    opacity: 0.95;
 }
 
 .card-preview-footer {
     padding: 10px 15px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255,255,255,0.2);
     font-size: 0.8rem;
-    color: #777;
     display: flex;
     align-items: center;
+    opacity: 0.9;
 }
 
 .card-badge {
