@@ -30,22 +30,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         return lines.join('\r\n');
     }
 
-    // --- Try to render QR using QRCode lib. If it fails, try an alternate canvas-based fallback.
-    // --- In ANY error case we DO NOT write the raw vCard text into the visible UI.
     function generateQRCode(container, text) {
-        // clear previous QR and any stray nodes
         container.innerHTML = '';
 
-        // keep a hidden blob element for downloads/debug if needed
-        const hiddenPre = document.createElement('pre');
-        hiddenPre.style.display = 'none';
-        hiddenPre.textContent = text;
-        hiddenPre.id = 'hidden-vcard-payload';
-        container.appendChild(hiddenPre);
-
-        // try primary library-based render
         try {
-            // If QRCode is not defined this will throw and go to catch
+            if (typeof QRCode === 'undefined') {
+                console.error('QRCode library not loaded');
+                container.innerHTML = '<p style="font-size: 12px; color: #666;">QR Code unavailable</p>';
+                return;
+            }
+
             new QRCode(container, {
                 text: text,
                 width: 150,
@@ -54,37 +48,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
             });
-
-            // ensure hidden pre remains hidden and does not affect layout
-            hiddenPre.style.display = 'none';
-            return;
         } catch (err) {
-            console.warn('QRCode lib failed, will try fallback canvas method.', err);
+            console.error('QR Code generation failed:', err);
+            container.innerHTML = '<p style="font-size: 12px; color: #666;">QR Code generation failed</p>';
         }
-
-        // fallback: draw a simple QR using a lightweight library-less approach using "qrcode" npm style is not available in browser.
-        // We'll attempt to use "kjua" if present, otherwise keep hidden payload and bail silently.
-        try {
-            // kjua renders to an element if present (some projects include other QR libs)
-            if (typeof kjua === 'function') {
-                const img = kjua({ text, size: 150, render: 'image' });
-                container.appendChild(img);
-                hiddenPre.style.display = 'none';
-                return;
-            }
-        } catch (err) {
-            console.warn('kjua fallback failed.', err);
-        }
-
-        // final safe fallback: don't show raw vCard — instead show a small non-intrusive placeholder icon/text
-        const fallback = document.createElement('div');
-        fallback.setAttribute('aria-hidden', 'true');
-        fallback.className = 'qr-fallback';
-        fallback.innerHTML = `<svg width="56" height="56" viewBox="0 0 24 24" fill="none" style="opacity:.85"><rect x="3" y="3" width="6" height="6" fill="#000"/><rect x="15" y="3" width="6" height="6" fill="#000"/><rect x="3" y="15" width="6" height="6" fill="#000"/><rect x="11" y="11" width="2" height="2" fill="#000"/></svg>`;
-        container.appendChild(fallback);
-
-        // hiddenPre remains available for download or debugging but not visible
-        hiddenPre.style.display = 'none';
     }
 
     try {

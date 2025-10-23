@@ -130,11 +130,8 @@ def create_card():
         phone = request.form.get('phone')
         website = request.form.get('website')
         address = request.form.get('address')
-        linkedin = request.form.get('linkedin')
-        twitter = request.form.get('twitter')
         instagram = request.form.get('instagram')
         facebook = request.form.get('facebook')
-        github = request.form.get('github')
         template = request.form.get('template', 'template1')
         is_public = request.form.get('is_public') in ['true', 'on', '1']  # ✅ handle checkbox
 
@@ -157,11 +154,8 @@ def create_card():
             'phone': phone,
             'website': website,
             'address': address,
-            'linkedin': linkedin,
-            'twitter': twitter,
             'instagram': instagram,
             'facebook': facebook,
-            'github': github,
             'template': template,
             'profile_image_url': profile_image_url,
             'is_public': is_public,

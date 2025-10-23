@@ -15,11 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         website: document.getElementById('previewWebsite'),    // may be created below
         address: document.getElementById('previewAddress'),    // may be created below
         bio: document.getElementById('previewBio'),            // may be created below
-        linkedin: document.getElementById('previewLinkedin'),
-        twitter: document.getElementById('previewTwitter'),
         instagram: document.getElementById('previewInstagram'),
         facebook: document.getElementById('previewFacebook'),
-        github: document.getElementById('previewGithub'),
     };
 
     // If the preview HTML doesn't already contain some optional nodes (website/address/bio/social icons),
@@ -63,18 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
             div.id = 'previewSocials';
             div.className = 'preview-socials';
             div.innerHTML = `
-                <a id="previewLinkedin" href="#" target="_blank" style="display:none;">LinkedIn</a>
-                <a id="previewTwitter" href="#" target="_blank" style="display:none;">Twitter</a>
                 <a id="previewInstagram" href="#" target="_blank" style="display:none;">Instagram</a>
                 <a id="previewFacebook" href="#" target="_blank" style="display:none;">Facebook</a>
-                <a id="previewGithub" href="#" target="_blank" style="display:none;">GitHub</a>
             `;
             content.appendChild(div);
-            previewFields.linkedin = document.getElementById('previewLinkedin');
-            previewFields.twitter = document.getElementById('previewTwitter');
             previewFields.instagram = document.getElementById('previewInstagram');
             previewFields.facebook = document.getElementById('previewFacebook');
-            previewFields.github = document.getElementById('previewGithub');
         }
     })();
 
@@ -125,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setPreviewText('address', input.value);
             } else if (id === 'bio') {
                 setPreviewText('bio', input.value);
-            } else if (id === 'linkedin' || id === 'twitter' || id === 'instagram' || id === 'facebook' || id === 'github') {
+            } else if (id === 'instagram' || id === 'facebook') {
                 setPreviewText(id, input.value, true);
             } else if (previewFields[id]) {
                 // animate text change
@@ -222,11 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     setPreviewText('address', card.address);
                     setPreviewText('bio', card.bio);
 
-                    setPreviewText(previewFields.linkedin, card.linkedin, true);
-                    setPreviewText(previewFields.twitter, card.twitter, true);
                     setPreviewText(previewFields.instagram, card.instagram, true);
                     setPreviewText(previewFields.facebook, card.facebook, true);
-                    setPreviewText(previewFields.github, card.github, true);
 
                     // Ensure template applied
                     if (card.template) setActiveTemplate(card.template);
