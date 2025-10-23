@@ -7,6 +7,8 @@ import os
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+import base64
+import io
 
 # NEW imports
 from itsdangerous import URLSafeTimedSerializer
@@ -117,7 +119,17 @@ def view_card(card_id):
         flash("Card not found or you do not have permission to view it.", "danger")
         return redirect(url_for('cards'))
 
+    # prepare profile image src (prefer static URL, fallback to base64 data)
+    profile_src = ''
+    if card.get('profile_image_url'):
+        profile_src = card['profile_image_url']
+    elif card.get('profile_image_data'):
+        mime = card.get('profile_image_mime', 'image/png')
+        profile_src = f"data:{mime};base64,{card['profile_image_data']}"
+
     card['_id'] = str(card['_id'])
+    card['profile_image_src'] = profile_src
+
     return render_template('view_card.html', card=card, card_id=card['_id'])
 
 @app.route('/edit/<card_id>')
@@ -154,12 +166,27 @@ def get_cards():
 def get_card(card_id):
     try:
         card = cards_col.find_one({'_id': ObjectId(card_id)})
-        if card:
-            cards_col.update_one({'_id': ObjectId(card_id)}, {'$inc': {'view_count': 1}})
-            card['_id'] = str(card['_id'])
+        if not card:
+            return jsonify({'success': False, 'error': 'Card not found'}), 404
+
+        # Increment view count
+        cards_col.update_one({'_id': ObjectId(card_id)}, {'$inc': {'view_count': 1}})
+
+        # Prepare profile image src (same as in view_card)
+        profile_src = ''
+        if card.get('profile_image_url'):
+            profile_src = card['profile_image_url']
+        elif card.get('profile_image_data'):
+            mime = card.get('profile_image_mime', 'image/png')
+            profile_src = f"data:{mime};base64,{card['profile_image_data']}"
+
+        card['_id'] = str(card['_id'])
+        card['profile_image_src'] = profile_src
+
         return jsonify({'success': True, 'data': card})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+
 
 @app.route('/api/cards', methods=['POST'])
 def create_card():
@@ -181,12 +208,26 @@ def create_card():
         is_public = request.form.get('is_public') in ['true', 'on', '1']
 
         profile_image_url = ''
+        profile_image_data = None
+        profile_image_mime = None
+
         if 'profile_image' in request.files:
             file = request.files['profile_image']
-            if file.filename != '':
+            if file and file.filename != '':
                 filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                # read file bytes and save to disk
+                file_bytes = file.read()
+                save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                with open(save_path, 'wb') as f:
+                    f.write(file_bytes)
+
+                # build static URL (served from static/uploads)
                 profile_image_url = url_for('static', filename=f'uploads/{filename}')
+
+                # store base64 + mime in DB so the image is available even if file is lost
+                profile_image_data = base64.b64encode(file_bytes).decode('utf-8')
+                profile_image_mime = file.mimetype or 'image/png'
 
         card_data = {
             'full_name': full_name,
@@ -201,6 +242,8 @@ def create_card():
             'facebook': facebook,
             'template': template,
             'profile_image_url': profile_image_url,
+            'profile_image_data': profile_image_data,
+            'profile_image_mime': profile_image_mime,
             'is_public': is_public,
             'created_at': datetime.utcnow(),
             'updated_at': datetime.utcnow(),
@@ -213,6 +256,7 @@ def create_card():
         return jsonify({'success': True, 'data': card_data})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+
 
 @app.route('/api/cards/<card_id>', methods=['PUT'])
 def update_card(card_id):

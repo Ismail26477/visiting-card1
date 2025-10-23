@@ -206,8 +206,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (card.full_name) previewFields.full_name.textContent = card.full_name;
                     if (card.job_title) previewFields.job_title.textContent = card.job_title;
                     if (card.company) previewFields.company.textContent = card.company;
-                    if (card.profile_image_url) previewFields.profile_image.src = card.profile_image_url;
-
+                    if (card.profile_image_url) {
+                        previewFields.profile_image.src = card.profile_image_url;
+                    } else if (card.profile_image_data) {
+                        previewFields.profile_image.src = `data:${card.profile_image_mime || 'image/png'};base64,${card.profile_image_data}`;
+                    }
                     // Other fields (use utilities so visibility is handled)
                     setPreviewText('website', card.website, true);
                     setPreviewText('address', card.address);

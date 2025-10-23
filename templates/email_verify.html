@@ -1,10 +1,149 @@
-<!doctype html>
-<html>
-  <body>
-    <p>Hi — thanks for registering.</p>
-    <p>Click to verify your email (link expires in 24 hours):</p>
-    <p><a href="{{ confirm_url }}">{{ confirm_url }}</a></p>
-    <br>
-    <p>If you did not sign up, ignore this message.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email - Digital Visiting Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        .email-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        .email-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        .email-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+        }
+        .email-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .email-header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        .email-body {
+            padding: 40px 30px;
+            color: #1e293b;
+        }
+        .email-body p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #475569;
+        }
+        .verify-button {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .verify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        .email-footer {
+            padding: 30px;
+            background: #f8fafc;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .email-footer p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+        .email-footer .small-text {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .divider {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="email-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h1>Verify Your Email</h1>
+            <p>Welcome to Digital Visiting Card</p>
+        </div>
+
+        <div class="email-body">
+            <p>Hi there,</p>
+            <p>Thanks for registering! We're excited to have you on board.</p>
+            <p>To complete your registration and start creating amazing digital visiting cards, please verify your email address by clicking the button below:</p>
+
+            <center>
+                <a href="{{ confirm_url }}" class="verify-button">Verify Email Address</a>
+            </center>
+
+            <div class="divider"></div>
+
+            <p style="font-size: 14px; color: #64748b;">Or copy and paste this link into your browser:</p>
+            <p style="word-break: break-all; font-size: 13px; color: #2563eb; background: #f1f5f9; padding: 12px; border-radius: 8px; font-family: monospace;">
+                {{ confirm_url }}
+            </p>
+
+            <p style="margin-top: 30px; font-size: 14px; color: #ef4444; font-weight: 600;">
+                ⏰ This link expires in 24 hours
+            </p>
+        </div>
+
+        <div class="email-footer">
+            <p>If you did not sign up for this account, please ignore this email.</p>
+            <p class="small-text">© 2024 Digital Visiting Card. All rights reserved.</p>
+        </div>
+    </div>
+</body>
 </html>

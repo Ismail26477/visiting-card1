@@ -1209,60 +1209,52 @@ font-weight: 500;
     color: var(--secondary-color);
     margin-bottom: 20px;
     z-index: 1;
-    position: relative;
+   position: relative;
 }
 
-/* Improved QR Container Style */
-/* ✨ Modern QR Container Style */
+/* ✨ Premium Modern QR Container */
+/* QR render wrapper: exact pixel box that holds the generated QR */
+.qr-render-wrapper {
+  display: inline-block;
+  line-height: 0;
+  overflow: hidden;
+  text-align: center;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* If library produces <svg> — make it fill wrapper and preserve crisp shape */
+.qr-render-wrapper svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* If library produces <canvas> — force size to wrapper and use image-rendering for crisp blocks */
+.qr-render-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  image-rendering: pixelated; /* prevents smoothing for module edges when scaling */
+}
+
+/* If library produces <img> (dataURL), make it fill wrapper */
+.qr-render-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: contain;
+}
+
+/* Ensure main container has enough space for QR */
 .qr-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 170px;
-    height: 170px;
-    margin: 30px auto;
-    padding: 12px;
-    background: linear-gradient(145deg, #ffffff, #f3f3f3);
-    border-radius: 16px;
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
-    transition: all 0.35s ease;
-    overflow: hidden;
-}
-
-.qr-container::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    background: radial-gradient(circle at top left, #00c6ff, #0072ff);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-}
-
-.qr-container:hover::before {
-    opacity: 0.15;
-}
-
-.qr-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 12px;
-    z-index: 1;
-    transition: transform 0.35s ease;
-}
-
-.qr-container:hover img {
-    transform: scale(1.06) rotate(1deg);
-}
-
-.qr-container:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(145deg, #fdfdfd, #f1f1f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;            /* visual padding outside the QR box; wrapper is exact size */
+  background: transparent;  /* leave visual background to your theme */
+  min-width: 200px;
+  min-height: 200px;
 }
 
 
@@ -1391,6 +1383,259 @@ font-weight: 500;
 
     .btn {
         width: 100%;
+    }
+}
+
+/* Modern Authentication Pages Styling */
+.auth-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+}
+
+.auth-container::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+.auth-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 3rem;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+    animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.auth-form {
+    margin-bottom: 2rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.auth-form label svg {
+    color: #667eea;
+    flex-shrink: 0;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    font-family: inherit;
+}
+
+.auth-form input:hover {
+    background: #ffffff;
+    border-color: #cbd5e1;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.btn-auth::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-auth:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-auth-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-auth-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+}
+
+.btn-auth-primary:active {
+    transform: translateY(0);
+}
+
+.auth-footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.auth-footer p {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.auth-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.auth-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.auth-link:hover::after {
+    width: 100%;
+}
+
+.auth-link:hover {
+    color: #764ba2;
+}
+
+@media (max-width: 768px) {
+    .auth-card {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+
+    .auth-title {
+        font-size: 1.75rem;
+    }
+
+    .auth-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .auth-icon svg {
+        width: 40px;
+        height: 40px;
     }
 }
 
