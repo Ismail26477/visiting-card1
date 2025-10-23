@@ -1,0 +1,8 @@
+<!doctype html>
+<title>Resend verification</title>
+<h2>Resend verification email</h2>
+<form method="post" action="{{ url_for('resend_verification') }}">
+  <label>Email</label>
+  <input type="email" name="email" required>
+  <button type="submit">Resend</button>
+</form>
